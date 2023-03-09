@@ -8,14 +8,31 @@ import Button from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import CompanyInfo from './companyInfo';
-
-export default function TextMobileStepper({ CompanyData, handelChange }) {
+import ResumeInfo from './ResumeInfo';
+export default function TextMobileStepper({
+  CompanyData,
+  handelChange,
+  companyInfo,
+  handleAddCompany,
+  handleRemoveCompany,
+  handleUpdateCompany,
+  userInfo,
+  handelChangeuserInfo,
+  GenerateGpt,
+}) {
   const steps = [
     {
       label: 'Personal Info',
-      description: `For each ad campaign that you create, you can control how much
-                you're willing to spend on clicks and conversions, which networks
-                and geographical locations you want your ads to show on, and more.`,
+      description: (
+        <ResumeInfo
+          companyInfo={companyInfo}
+          handleAddCompany={handleAddCompany}
+          handleRemoveCompany={handleRemoveCompany}
+          handleUpdateCompany={handleUpdateCompany}
+          userInfo={userInfo}
+          handelChangeuserInfo={handelChangeuserInfo}
+        />
+      ),
     },
     {
       label: 'Company Info',
@@ -29,7 +46,11 @@ export default function TextMobileStepper({ CompanyData, handelChange }) {
   const maxSteps = steps.length;
 
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if (activeStep === maxSteps - 1) {
+      GenerateGpt();
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
   };
 
   const handleBack = () => {
@@ -63,13 +84,15 @@ export default function TextMobileStepper({ CompanyData, handelChange }) {
           <Button
             size='small'
             onClick={handleNext}
-            disabled={activeStep === maxSteps - 1}
+            // disabled={activeStep === maxSteps - 1}
           >
-            Next
-            {theme.direction === 'rtl' ? (
-              <KeyboardArrowLeft />
+            {activeStep === maxSteps - 1 ? (
+              <>Generate</>
             ) : (
-              <KeyboardArrowRight />
+              <>
+                Next
+                <KeyboardArrowRight />
+              </>
             )}
           </Button>
         }

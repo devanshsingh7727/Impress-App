@@ -4,7 +4,6 @@ import PizZip from 'pizzip';
 import React, { useState } from 'react';
 
 function LandingPage({ CompanyData, handelChange }) {
-  console.log('CompanyData', CompanyData);
   return (
     <Card>
       <CardContent>
@@ -17,7 +16,7 @@ function LandingPage({ CompanyData, handelChange }) {
           name='recruiter_name'
           label="Recruiter's name"
         />
-        <TextField
+        {/* <TextField
           value={CompanyData?.recruiter_email}
           fullWidth
           style={{ margin: '10px 0px' }}
@@ -25,8 +24,8 @@ function LandingPage({ CompanyData, handelChange }) {
           variant='outlined'
           name='recruiter_email'
           label="Recruiter's Email"
-        />
-        <TextField
+        /> */}
+        {/* <TextField
           value={CompanyData?.your_email}
           fullWidth
           style={{ margin: '10px 0px' }}
@@ -34,7 +33,7 @@ function LandingPage({ CompanyData, handelChange }) {
           variant='outlined'
           name='your_email'
           label='Your Email Address'
-        />
+        /> */}
         <TextField
           value={CompanyData?.position}
           fullWidth

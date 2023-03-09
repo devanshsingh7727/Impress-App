@@ -7,8 +7,18 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import CompanyInfo from './companyInfo';
 const steps = ['Personal Info', 'Company Info'];
-
-export default function HorizontalLinearStepper({ CompanyData, handelChange }) {
+import ResumeInfo from './ResumeInfo';
+export default function HorizontalLinearStepper({
+  CompanyData,
+  handelChange,
+  companyInfo,
+  handleAddCompany,
+  handleRemoveCompany,
+  handleUpdateCompany,
+  userInfo,
+  handelChangeuserInfo,
+  GenerateGpt,
+}) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
 
@@ -21,14 +31,18 @@ export default function HorizontalLinearStepper({ CompanyData, handelChange }) {
   };
 
   const handleNext = () => {
-    let newSkipped = skipped;
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
-    }
+    if (activeStep === steps.length - 1) {
+      GenerateGpt();
+    } else {
+      let newSkipped = skipped;
+      if (isStepSkipped(activeStep)) {
+        newSkipped = new Set(newSkipped.values());
+        newSkipped.delete(activeStep);
+      }
 
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped(newSkipped);
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      setSkipped(newSkipped);
+    }
   };
 
   const handleBack = () => {
@@ -90,7 +104,14 @@ export default function HorizontalLinearStepper({ CompanyData, handelChange }) {
                 handelChange={handelChange}
               />
             ) : (
-              'WIP'
+              <ResumeInfo
+                companyInfo={companyInfo}
+                handleAddCompany={handleAddCompany}
+                handleRemoveCompany={handleRemoveCompany}
+                handleUpdateCompany={handleUpdateCompany}
+                userInfo={userInfo}
+                handelChangeuserInfo={handelChangeuserInfo}
+              />
             )}
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
