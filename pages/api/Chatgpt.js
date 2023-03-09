@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-  if (req.method === 'GET') {
+  if (req.method === 'POST') {
     // const prompt = `My name is ${applicantName}. I want to work for ${companyName}, they are ${companyDescription}
     // I am applying for the job ${jobTitle}. I have been working before for: ${remainderText()}
     // And I have used the technologies such as ${technologies}
@@ -25,6 +25,7 @@ export default async function handler(req, res) {
       }
     );
     const data = await response.json();
+    console.log(data);
     return res.status(200).json({ text: data.choices[0].text });
   }
 }

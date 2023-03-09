@@ -84,7 +84,7 @@ function LandingPage() {
         <Button
           onClick={() => {
             fetch('/api/Chatgpt', {
-              method: 'GET',
+              method: 'POST',
             });
           }}
         >
