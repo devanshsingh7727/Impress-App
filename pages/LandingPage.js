@@ -23,42 +23,36 @@ function LandingPage() {
       <CardContent>
         <TextField
           onChange={handelChange}
-          label='Outlined'
           variant='outlined'
           name='recruiter_name'
           label="Recruiter's name"
         />
         <TextField
           onChange={handelChange}
-          label='Outlined'
           variant='outlined'
           name='recruiter_email'
           label="Recruiter's Email"
         />
         <TextField
           onChange={handelChange}
-          label='Outlined'
           variant='outlined'
           name='your_email'
           label='Your Email Address'
         />
         <TextField
           onChange={handelChange}
-          label='Outlined'
           variant='outlined'
           name='position'
           label='Position Applying for'
         />
         <TextField
           onChange={handelChange}
-          label='Outlined'
           variant='outlined'
           name='company_name'
           label='Company Name'
         />
         <TextField
           onChange={handelChange}
-          label='Outlined'
           label='Company Description'
           variant='outlined'
           name='company_description'
