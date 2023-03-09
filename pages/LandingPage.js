@@ -82,10 +82,28 @@ function LandingPage() {
         </Button>
 
         <Button
-          onClick={() => {
-            fetch('/api/Chatgpt', {
-              method: 'POST',
-            });
+          onClick={async () => {
+            const response = await fetch(
+              'https://api.openai.com/v1/engines/text-davinci-003/completions',
+              {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization:
+                    'Bearer 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',
+                },
+                body: JSON.stringify({
+                  prompt: `write a professional comprehensive review in breif of boat object around 1000 words in professional tone which is more descriptive based on attributes such as`,
+                  temperature: 0.6,
+                  max_tokens: 350,
+                  top_p: 1,
+                  frequency_penalty: 1,
+                  presence_penalty: 1,
+                }),
+              }
+            );
+            const data = await response.json();
+            console.log(data);
           }}
         >
           Send
