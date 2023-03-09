@@ -13,7 +13,7 @@ export default async function handler(req, res) {
         headers: {
           'Content-Type': 'application/json',
           Authorization:
-            'Bearer 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',
+            'Bearer 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',
         },
         body: JSON.stringify({
           prompt: `write a professional comprehensive review in breif of boat object around 1000 words in professional tone which is more descriptive based on attributes such as`,
