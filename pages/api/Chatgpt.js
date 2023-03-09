@@ -27,6 +27,6 @@ export default async function handler(req, res) {
     );
     const data = await response.json();
     console.log(data);
-    return res.status(500).json({ rep: data });
+    return res.status(500).json({ text: data.choices[0].text });
   }
 }
