@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     // And I have used the technologies such as ${technologies}
     // I want to cold email ${recruiterName} my resume and write why I fit for the company.
     // Can you please write me the email in a friendly voice, not offical? without subject, maximum 300 words and say in the end that my CV is attached.`;
-
+    //d
     const response = await fetch(
       'https://api.openai.com/v1/engines/text-davinci-003/completions',
       {
