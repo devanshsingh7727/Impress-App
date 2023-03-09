@@ -12,7 +12,8 @@ export default async function handler(req, res) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: process.env.Token,
+          Authorization:
+            'Bearer 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',
         },
         body: JSON.stringify({
           prompt: `write a professional comprehensive review in breif of boat object around 1000 words in professional tone which is more descriptive based on attributes such as`,
