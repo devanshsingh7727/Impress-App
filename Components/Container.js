@@ -1,4 +1,10 @@
-import { Button, Card, CardContent, useMediaQuery } from '@mui/material';
+import {
+  Button,
+  Card,
+  CardContent,
+  TextField,
+  useMediaQuery,
+} from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import DesktopStepper from './DesktopStepper';
@@ -144,20 +150,51 @@ function container() {
     setMainDescription(data.choices[0].text);
     Swal.close();
   };
+  const ShareButton = () => (
+    <>
+      <Button
+        sx={{ margin: '10px 10px' }}
+        variant='outlined'
+        onClick={() => navigator.clipboard.writeText(MainDescription)}
+      >
+        Copy
+      </Button>
+      <Button
+        sx={{ margin: '10px 10px' }}
+        variant='outlined'
+        onClick={() => setMainDescription('')}
+      >
+        reset
+      </Button>
+    </>
+  );
   return (
-    <Card>
+    <Card
+      sx={{
+        height: matches ? 'auto' : '100vh',
+        width: matches ? '70%' : '100%',
+        background: !MainDescription && !matches && 'hsla(286, 48%, 91%, 1)',
+
+        background:
+          !MainDescription &&
+          !matches &&
+          'linear-gradient(90deg, hsla(286, 48%, 91%, 1) 0%, hsla(340, 73%, 75%, 1) 50%, hsla(263, 58%, 45%, 1) 100%)',
+      }}
+    >
       <CardContent>
         {MainDescription ? (
           <>
-            <Button
-              onClick={() =>
-                navigator.clipboard.writeText('Copy this text to clipboard')
-              }
-            >
-              Copy
-            </Button>
-            <Button onClick={() => setMainDescription('')}>reset</Button>
-            <p>{MainDescription}</p>
+            <ShareButton />
+            <br />
+            <TextField
+              fullWidth
+              label='AI generated Text'
+              multiline
+              minRows={4}
+              defaultValue={MainDescription}
+            />
+            <br />
+            <ShareButton />
           </>
         ) : matches ? (
           <DesktopStepper

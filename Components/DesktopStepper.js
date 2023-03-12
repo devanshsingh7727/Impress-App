@@ -120,6 +120,7 @@ export default function HorizontalLinearStepper({
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Button
+              variant='outlined'
               color='inherit'
               disabled={activeStep === 0}
               onClick={handleBack}
@@ -129,7 +130,7 @@ export default function HorizontalLinearStepper({
             </Button>
             <Box sx={{ flex: '1 1 auto' }} />
 
-            <Button onClick={handleNext}>
+            <Button onClick={handleNext} variant='outlined'>
               {activeStep === steps.length - 1 ? 'Generate' : 'Next'}
             </Button>
           </Box>

@@ -83,12 +83,14 @@ export default function TextMobileStepper({
         {steps[activeStep].description}
       </Box>
       <MobileStepper
+        sx={{ position: 'absolute', bottom: '0', width: '100%', left: 0 }}
         variant='text'
         steps={maxSteps}
         position='static'
         activeStep={activeStep}
         nextButton={
           <Button
+            variant='outlined'
             size='small'
             onClick={handleNext}
             // disabled={activeStep === maxSteps - 1}
@@ -104,7 +106,12 @@ export default function TextMobileStepper({
           </Button>
         }
         backButton={
-          <Button size='small' onClick={handleBack} disabled={activeStep === 0}>
+          <Button
+            variant='outlined'
+            size='small'
+            onClick={handleBack}
+            disabled={activeStep === 0}
+          >
             {theme.direction === 'rtl' ? (
               <KeyboardArrowRight />
             ) : (
