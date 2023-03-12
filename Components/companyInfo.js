@@ -3,7 +3,7 @@ import Docxtemplater from 'docxtemplater';
 import PizZip from 'pizzip';
 import React, { useState } from 'react';
 
-function LandingPage({ CompanyData, handelChange }) {
+function LandingPage({ CompanyData, handelChange, ClearCompanyInfo }) {
   return (
     <Card>
       <CardContent>
@@ -62,6 +62,7 @@ function LandingPage({ CompanyData, handelChange }) {
           name='company_description'
         />
       </CardContent>
+      <Button onClick={ClearCompanyInfo}>Reset Company Info</Button>
     </Card>
   );
 }

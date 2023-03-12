@@ -1,8 +1,9 @@
 import { Button, Card, CardContent, useMediaQuery } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import DesktopStepper from './DesktopStepper';
 import MobileStepper from './MobileStepper';
+import Swal from 'sweetalert2';
 function container() {
   const [MainDescription, setMainDescription] = useState('');
   const [CompanyData, setCompanyData] = useState({
@@ -21,7 +22,43 @@ function container() {
     technologies: '',
   });
   const [companyInfo, setCompanyInfo] = useState([{ name: '', position: '' }]);
-
+  // useEffect(() => {
+  //   const items = JSON.parse(localStorage.getItem('CompanyData'));
+  //   if (items) {
+  //     setCompanyData(items);
+  //   }
+  // }, []);
+  const ClearPersonalInfo = () => {
+    setuserInfo({
+      fullname: '',
+      // currentPosition: '',
+      year: '',
+      technologies: '',
+    });
+    setCompanyInfo([{ name: '', position: '' }]);
+  };
+  const ClearCompanyInfo = () => {
+    setCompanyData({
+      recruiter_name: '',
+      // recruiter_email: '',
+      // your_email: '',
+      position: '',
+      company_name: '',
+      company_description: '',
+    });
+  };
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem('userInfo'));
+    if (items) {
+      setuserInfo(items);
+    }
+  }, []);
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem('companyInfo'));
+    if (items) {
+      setCompanyInfo(items);
+    }
+  }, []);
   const handelChangeuserInfo = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -60,7 +97,22 @@ function container() {
     return stringText;
   };
   const GenerateGpt = async () => {
+    Swal.fire({
+      title: `A.I is generating your cold email, Please wait for few seconds.`,
+      // html: `LookSeas is fast, so this won’t take long.  Thank you for your patience…`,
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+    localStorage.setItem('CompanyData', JSON.stringify(CompanyData));
+    localStorage.setItem('userInfo', JSON.stringify(userInfo));
+
+    localStorage.setItem('companyInfo', JSON.stringify(companyInfo));
+
     let initalData = { ...CompanyData, ...userInfo };
+
     initalData.remainderText = remainderText();
 
     let prompt = `My name is ${initalData.fullname}. I want to work for ${initalData.company_name}, they are ${initalData.company_description}
@@ -90,6 +142,7 @@ function container() {
     );
     const data = await response.json();
     setMainDescription(data.choices[0].text);
+    Swal.close();
   };
   return (
     <Card>
@@ -108,6 +161,7 @@ function container() {
           </>
         ) : matches ? (
           <DesktopStepper
+            ClearPersonalInfo={ClearPersonalInfo}
             CompanyData={CompanyData}
             handelChange={handelChange}
             companyInfo={companyInfo}
@@ -117,9 +171,11 @@ function container() {
             userInfo={userInfo}
             handelChangeuserInfo={handelChangeuserInfo}
             GenerateGpt={GenerateGpt}
+            ClearCompanyInfo={ClearCompanyInfo}
           />
         ) : (
           <MobileStepper
+            ClearPersonalInfo={ClearPersonalInfo}
             CompanyData={CompanyData}
             handelChange={handelChange}
             companyInfo={companyInfo}
@@ -129,6 +185,7 @@ function container() {
             userInfo={userInfo}
             handelChangeuserInfo={handelChangeuserInfo}
             GenerateGpt={GenerateGpt}
+            ClearCompanyInfo={ClearCompanyInfo}
           />
         )}
       </CardContent>

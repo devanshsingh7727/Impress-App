@@ -18,6 +18,8 @@ export default function HorizontalLinearStepper({
   userInfo,
   handelChangeuserInfo,
   GenerateGpt,
+  ClearPersonalInfo,
+  ClearCompanyInfo,
 }) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
@@ -102,6 +104,7 @@ export default function HorizontalLinearStepper({
               <CompanyInfo
                 CompanyData={CompanyData}
                 handelChange={handelChange}
+                ClearCompanyInfo={ClearCompanyInfo}
               />
             ) : (
               <ResumeInfo
@@ -111,6 +114,7 @@ export default function HorizontalLinearStepper({
                 handleUpdateCompany={handleUpdateCompany}
                 userInfo={userInfo}
                 handelChangeuserInfo={handelChangeuserInfo}
+                ClearPersonalInfo={ClearPersonalInfo}
               />
             )}
           </Typography>

@@ -19,6 +19,8 @@ export default function TextMobileStepper({
   userInfo,
   handelChangeuserInfo,
   GenerateGpt,
+  ClearPersonalInfo,
+  ClearCompanyInfo,
 }) {
   const steps = [
     {
@@ -31,13 +33,18 @@ export default function TextMobileStepper({
           handleUpdateCompany={handleUpdateCompany}
           userInfo={userInfo}
           handelChangeuserInfo={handelChangeuserInfo}
+          ClearPersonalInfo={ClearPersonalInfo}
         />
       ),
     },
     {
       label: 'Company Info',
       description: (
-        <CompanyInfo CompanyData={CompanyData} handelChange={handelChange} />
+        <CompanyInfo
+          CompanyData={CompanyData}
+          handelChange={handelChange}
+          ClearCompanyInfo={ClearCompanyInfo}
+        />
       ),
     },
   ];
