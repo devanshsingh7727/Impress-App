@@ -171,14 +171,14 @@ function container() {
   return (
     <Card
       sx={{
-        height: matches ? 'auto' : '100vh',
+        minHeight: matches ? 'auto' : '100vh',
         width: matches ? '70%' : '100%',
-        background: !MainDescription && !matches && 'hsla(286, 48%, 91%, 1)',
+        // background: !MainDescription && !matches && 'hsla(286, 48%, 91%, 1)',
 
-        background:
-          !MainDescription &&
-          !matches &&
-          'linear-gradient(90deg, hsla(286, 48%, 91%, 1) 0%, hsla(340, 73%, 75%, 1) 50%, hsla(263, 58%, 45%, 1) 100%)',
+        // background:
+        //   !MainDescription &&
+        //   !matches &&
+        //   'linear-gradient(90deg, hsla(286, 48%, 91%, 1) 0%, hsla(340, 73%, 75%, 1) 50%, hsla(263, 58%, 45%, 1) 100%)',
       }}
     >
       <CardContent>
@@ -211,7 +211,7 @@ function container() {
             ClearCompanyInfo={ClearCompanyInfo}
           />
         ) : (
-          <MobileStepper
+          <DesktopStepper
             ClearPersonalInfo={ClearPersonalInfo}
             CompanyData={CompanyData}
             handelChange={handelChange}

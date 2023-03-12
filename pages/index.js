@@ -21,7 +21,7 @@ export default function Home() {
         container
         sx={{
           width: '100%',
-          height: '100vh',
+          minHeight: '100vh',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
