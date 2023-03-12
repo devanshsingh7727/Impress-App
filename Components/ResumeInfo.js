@@ -53,7 +53,7 @@ function LandingPage({
           name='technologies'
         />
         {companyInfo.map((company, index) => (
-          <Card>
+          <Card key={index}>
             <TextField
               value={company?.name}
               fullWidth
