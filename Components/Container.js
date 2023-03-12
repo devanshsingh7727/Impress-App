@@ -158,7 +158,16 @@ function container() {
       <Button
         sx={{ margin: '10px 10px' }}
         variant='outlined'
-        onClick={() => navigator.clipboard.writeText(MainDescription)}
+        onClick={() => {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Copied to clipboard',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigator.clipboard.writeText(MainDescription);
+        }}
       >
         Copy
       </Button>

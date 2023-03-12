@@ -54,7 +54,7 @@ function LandingPage({
         />
         <Grid container spacing={1}>
           <Grid item md={12} sm={12} xs={12}>
-            <h4 style={{ textAlign: 'center' }}>Company's</h4>
+            <h4 style={{ textAlign: 'center' }}>Company's Details</h4>
           </Grid>
           {companyInfo.map((company, index) => (
             <Grid item md={6} sm={12} xs={12}>
