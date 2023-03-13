@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import CompanyInfo from './companyInfo';
 const steps = ['Personal Info', 'Company Info'];
 import ResumeInfo from './ResumeInfo';
-import { Card } from '@mui/material';
+import { Card, Grid } from '@mui/material';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 export default function HorizontalLinearStepper({
@@ -123,29 +123,41 @@ export default function HorizontalLinearStepper({
               />
             )}
           </Typography>
-          <Card
-            sx={{
-              display: 'flex',
-              // flexDirection: 'row',
-              justifyContent: 'space-between',
-              padding: '10px',
-            }}
-          >
-            <Button
-              variant='contained'
-              disabled={activeStep === 0}
-              onClick={handleBack}
-              sx={{ mr: 1 }}
+          <Grid container>
+            <Card
+              fullWidth
+              sx={{
+                display: 'flex',
+                // flexDirection: 'row',
+                justifyContent: 'space-between',
+                padding: '10px',
+              }}
             >
-              <KeyboardArrowLeft />
-              Back
-            </Button>
-
-            <Button onClick={handleNext} variant='contained'>
-              {activeStep === steps.length - 1 ? 'Generate' : 'Next'}
-              <KeyboardArrowRight />
-            </Button>
-          </Card>
+              <Grid item md={6} sm={6} xs={6}>
+                <Button
+                  onClick={handleNext}
+                  color={
+                    activeStep === steps.length - 1 ? 'success' : 'primary'
+                  }
+                  variant='contained'
+                >
+                  {activeStep === steps.length - 1 ? 'Generate' : 'Next'}
+                  {activeStep !== steps.length - 1 && <KeyboardArrowRight />}
+                </Button>
+              </Grid>
+              <Grid item md={6} sm={6} xs={6}>
+                <Button
+                  variant='contained'
+                  disabled={activeStep === 0}
+                  onClick={handleBack}
+                  sx={{ mr: 1 }}
+                >
+                  <KeyboardArrowLeft />
+                  Back
+                </Button>
+              </Grid>
+            </Card>
+          </Grid>
         </React.Fragment>
       )}
     </Box>

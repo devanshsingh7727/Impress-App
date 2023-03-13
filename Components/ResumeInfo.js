@@ -57,8 +57,8 @@ function LandingPage({
             <h4 style={{ textAlign: 'center' }}>Company's Details</h4>
           </Grid>
           {companyInfo.map((company, index) => (
-            <Grid item md={6} sm={12} xs={12}>
-              <Card key={index}>
+            <Grid item md={6} sm={12} xs={12} key={index}>
+              <Card>
                 <TextField
                   value={company?.name}
                   fullWidth
