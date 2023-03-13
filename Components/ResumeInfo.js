@@ -41,7 +41,7 @@ function LandingPage({
           type='number'
           variant='outlined'
           name='year'
-          label='For how long? (year)'
+          label='Total Year of Experience'
         />
         <TextField
           value={userInfo?.technologies}

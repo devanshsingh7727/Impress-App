@@ -126,7 +126,7 @@ function container() {
 
     let prompt = `My name is ${initalData.fullname}. I want to work for ${initalData.company_name}, they are ${initalData.company_description}
         I am applying for the job ${initalData.position}. I have been working before for: ${initalData.remainderText}
-        And I have used the technologies such as ${initalData.technologies} with total experience of ${initalData.year}
+        And I have used the skills such as ${initalData.technologies} with total experience of ${initalData.year}
         I want to cold email ${initalData.recruiter_name} my resume and write why I fit for the company.
         Can you please write me the email in a friendly voice, not offical? without subject, maximum 300 words and say in the end that my CV is attached.`;
 
@@ -185,12 +185,12 @@ function container() {
       sx={{
         minHeight: matches ? 'auto' : '100vh',
         width: matches ? '70%' : '100%',
-        // background: !MainDescription && !matches && 'hsla(286, 48%, 91%, 1)',
+        background: !MainDescription && !matches && 'hsla(286, 48%, 91%, 1)',
 
-        // background:
-        //   !MainDescription &&
-        //   !matches &&
-        //   'linear-gradient(90deg, hsla(286, 48%, 91%, 1) 0%, hsla(340, 73%, 75%, 1) 50%, hsla(263, 58%, 45%, 1) 100%)',
+        background:
+          !MainDescription &&
+          !matches &&
+          'linear-gradient(90deg, hsla(286, 48%, 91%, 1) 0%, hsla(340, 73%, 75%, 1) 50%, hsla(263, 58%, 45%, 1) 100%)',
       }}
     >
       <CardContent>

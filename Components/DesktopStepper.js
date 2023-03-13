@@ -8,6 +8,9 @@ import Typography from '@mui/material/Typography';
 import CompanyInfo from './companyInfo';
 const steps = ['Personal Info', 'Company Info'];
 import ResumeInfo from './ResumeInfo';
+import { Card } from '@mui/material';
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 export default function HorizontalLinearStepper({
   CompanyData,
   handelChange,
@@ -72,21 +75,23 @@ export default function HorizontalLinearStepper({
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Stepper activeStep={activeStep}>
-        {steps.map((label, index) => {
-          const stepProps = {};
-          const labelProps = {};
+      <Card sx={{ p: 1 }}>
+        <Stepper activeStep={activeStep}>
+          {steps.map((label, index) => {
+            const stepProps = {};
+            const labelProps = {};
 
-          if (isStepSkipped(index)) {
-            stepProps.completed = false;
-          }
-          return (
-            <Step key={label} {...stepProps}>
-              <StepLabel {...labelProps}>{label}</StepLabel>
-            </Step>
-          );
-        })}
-      </Stepper>
+            if (isStepSkipped(index)) {
+              stepProps.completed = false;
+            }
+            return (
+              <Step key={label} {...stepProps}>
+                <StepLabel {...labelProps}>{label}</StepLabel>
+              </Step>
+            );
+          })}
+        </Stepper>
+      </Card>
       {activeStep === steps.length ? (
         <React.Fragment>
           <Typography sx={{ mt: 2, mb: 1 }}>
@@ -118,22 +123,29 @@ export default function HorizontalLinearStepper({
               />
             )}
           </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+          <Card
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              padding: '10px',
+            }}
+          >
             <Button
-              variant='outlined'
-              color='inherit'
+              variant='contained'
               disabled={activeStep === 0}
               onClick={handleBack}
               sx={{ mr: 1 }}
             >
+              <KeyboardArrowLeft />
               Back
             </Button>
-            <Box sx={{ flex: '1 1 auto' }} />
 
-            <Button onClick={handleNext} variant='outlined'>
+            <Button onClick={handleNext} variant='contained'>
               {activeStep === steps.length - 1 ? 'Generate' : 'Next'}
+              <KeyboardArrowRight />
             </Button>
-          </Box>
+          </Card>
         </React.Fragment>
       )}
     </Box>
