@@ -126,7 +126,7 @@ export default function HorizontalLinearStepper({
           <Card
             sx={{
               display: 'flex',
-              flexDirection: 'row',
+              // flexDirection: 'row',
               justifyContent: 'space-between',
               padding: '10px',
             }}
