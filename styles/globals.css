@@ -128,10 +128,18 @@ a {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+.form-container .formUpload {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   justify-content: 'center';
   align-items: center;
 }
-
+.formButtons {
+  display: flex;
+  justify-content: space-between;
+}
 .form-container .form-group {
   display: flex;
   flex-direction: column;

@@ -2,7 +2,7 @@ import React from 'react';
 function MainContainer() {
   return (
     <div class='form-container'>
-      <form class='form'>
+      <form class='formUpload'>
         <div class='input-div'>
           <input class='input' name='file' type='file' />
           <svg
