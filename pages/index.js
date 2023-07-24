@@ -20,6 +20,7 @@ export default function Home() {
       <Grid
         container
         sx={{
+          backgroundColor: '#212121',
           width: '100%',
           minHeight: '100vh',
           display: 'flex',
