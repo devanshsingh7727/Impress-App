@@ -5,7 +5,7 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import CompanyInfo from './companyInfo';
+import CompanyInfo from './CompanyInfo';
 const steps = ['Personal Info', 'Company Info'];
 import ResumeInfo from './ResumeInfo';
 import { Card, Grid } from '@mui/material';
