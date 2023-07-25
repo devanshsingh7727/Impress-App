@@ -4,7 +4,7 @@ import { Configuration, OpenAIApi } from 'openai';
 // import { AutofillFormPrompt } from '../../../lib/utils';
 
 const configuration = new Configuration({
-  apiKey: process.env.OPEN_API,
+  apiKey: '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',
 });
 const openai = new OpenAIApi(configuration);
 
