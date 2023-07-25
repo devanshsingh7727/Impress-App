@@ -5,6 +5,8 @@ import CompanyInfoMain from './CompanyInfoMain';
 import InfoCard from './InfoCard';
 import ResumeUpload from './ResumeUpload';
 import axiosConnection from './axioshelper';
+import LoadingScreen from './LoadingScreen';
+import OutputPage from './OutputPage';
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
 });
@@ -12,6 +14,8 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 function Container() {
   const [activeStep, setactiveStep] = useState(0);
   const [resumeData, setresumeData] = useState('');
+  const [GeneratedEmail, setGeneratedEmail] = useState('');
+
   const [CompanyData, setCompanyData] = useState({
     recruiter_name: '',
     position: '',
@@ -59,20 +63,37 @@ function Container() {
   let vertical = 'bottom';
   let horizontal = 'right';
 
-  const handleFileChange = (event) => {
+  const handleFileChange = async (event) => {
+    setactiveStep(3);
+
     const file = event.target.files[0];
     if (file) {
       const formData = new FormData();
       formData.append('file', file);
 
-      axiosConnection.post('/pdfManager', formData, {
+      const { data } = await axiosConnection.post('/pdfManager', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-    }
-  };
 
+      const MainGpt = await axiosConnection.post('/Chatgpt', {
+        text: data.test,
+      });
+      setGeneratedEmail(MainGpt.data.data);
+    }
+    setactiveStep(4);
+  };
+  const CreateEmail = () => {
+    const recipient = 'recipient@example.com';
+    const subject = 'Hello!';
+    const content = 'test' || ''; // If content prop is not provided, use an empty string
+
+    const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(content)}`;
+    window.location.href = mailtoLink;
+  };
   return (
     <div>
       <Snackbar
@@ -104,8 +125,16 @@ function Container() {
           setresumeData={setresumeData}
           sendRequestPDFManager={handleFileChange}
         />
+      ) : activeStep == 3 ? (
+        <LoadingScreen setactiveStep={setactiveStep} />
+      ) : activeStep == 4 ? (
+        <OutputPage
+          GeneratedEmail={GeneratedEmail}
+          setactiveStep={setactiveStep}
+          CreateEmail={CreateEmail}
+        />
       ) : (
-        ''
+        'dfd'
       )}
     </div>
   );
