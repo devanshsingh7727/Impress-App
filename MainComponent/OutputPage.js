@@ -8,16 +8,25 @@ function CompanyInfoMain({ setactiveStep, GeneratedEmail, CreateEmail }) {
           style={{ color: 'rgba(255, 255, 255, 0.6)' }}
           onClick={() => setactiveStep(0)}
         />
-
         <div class='form-group'>
-          <label for='GeneratedEmail'>Generated Email</label>
+          <label for='subject'>Subject</label>
+          <input
+            type='text'
+            id='subject'
+            name='subject'
+            value={GeneratedEmail?.subject}
+            required=''
+          />
+        </div>
+        <div class='form-group'>
+          <label for='content'>Content</label>
           <textarea
-            name='GeneratedEmail'
-            id='GeneratedEmail'
+            name='content'
+            id='content'
             rows='10'
             cols='10'
             required=''
-            value={GeneratedEmail}
+            value={GeneratedEmail?.content}
           >
             {' '}
           </textarea>
@@ -31,7 +40,7 @@ function CompanyInfoMain({ setactiveStep, GeneratedEmail, CreateEmail }) {
               CreateEmail();
             }}
           >
-            Copy
+            Forward Email!
           </button>
         </div>
       </form>

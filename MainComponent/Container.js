@@ -14,10 +14,15 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 function Container() {
   const [activeStep, setactiveStep] = useState(0);
   const [resumeData, setresumeData] = useState('');
-  const [GeneratedEmail, setGeneratedEmail] = useState('');
+  const [GeneratedEmail, setGeneratedEmail] = useState({
+    subject: '',
+    content: '',
+  });
 
   const [CompanyData, setCompanyData] = useState({
     recruiter_name: '',
+    recruiter_email: '',
+
     position: '',
     company_name: '',
     company_description: '',
@@ -25,6 +30,8 @@ function Container() {
   const ClearCompanyInfo = () => {
     setCompanyData({
       recruiter_name: '',
+      recruiter_email: '',
+
       position: '',
       company_name: '',
       company_description: '',
@@ -51,6 +58,7 @@ function Container() {
   const SubmitCompanydata = () => {
     if (
       CompanyData?.recruiter_name &&
+      CompanyData?.recruiter_email &&
       CompanyData?.company_name &&
       CompanyData?.position &&
       CompanyData?.company_description
@@ -71,23 +79,30 @@ function Container() {
       const formData = new FormData();
       formData.append('file', file);
 
-      const { data } = await axiosConnection.post('/pdfManager', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      try {
+        const { data } = await axiosConnection.post('/pdfManager', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
 
-      const MainGpt = await axiosConnection.post('/Chatgpt', {
-        text: data.test,
-      });
-      setGeneratedEmail(MainGpt.data.data);
+        const MainGpt = await axiosConnection.post('/Chatgpt', {
+          text: data.test,
+          CompanyData,
+        });
+        setGeneratedEmail(JSON.parse(MainGpt.data.data));
+        setactiveStep(4);
+      } catch (err) {
+        setactiveStep(0);
+
+        console.log(err);
+      }
     }
-    setactiveStep(4);
   };
   const CreateEmail = () => {
-    const recipient = 'recipient@example.com';
-    const subject = 'Hello!';
-    const content = 'test' || ''; // If content prop is not provided, use an empty string
+    const recipient = CompanyData?.recruiter_email;
+    const subject = GeneratedEmail.subject;
+    const content = GeneratedEmail.content || ''; // If content prop is not provided, use an empty string
 
     const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(
       subject

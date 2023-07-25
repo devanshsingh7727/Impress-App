@@ -26,6 +26,17 @@ function CompanyInfoMain({
           />
         </div>
         <div class='form-group'>
+          <label for='recruiter_email'>Recruiter's email</label>
+          <input
+            onChange={handelChange}
+            type='text'
+            id='recruiter_email'
+            name='recruiter_email'
+            value={CompanyData.recruiter_email}
+            required=''
+          />
+        </div>
+        <div class='form-group'>
           <label for='position'>Position Applying for</label>
           <input
             onChange={handelChange}
