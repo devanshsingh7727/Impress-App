@@ -17,7 +17,7 @@ export default function Home() {
           content='Craft polished and personalized professional emails effortlessly. Generate from resume data and choose expertly designed templates. Make a lasting impression in just a few clicks. Swift, secure, and effective '
         />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
-        <link rel='icon' href='/favicon.ico' />
+        <link rel='icon' href='/icon-256x256.png' />
       </Head>
       <Grid
         container
