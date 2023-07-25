@@ -1,10 +1,21 @@
 import React from 'react';
-function MainContainer() {
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
+function MainContainer({ setactiveStep, sendRequestPDFManager }) {
   return (
     <div class='form-container'>
+      <ArrowBackIcon
+        style={{ color: 'rgba(255, 255, 255, 0.6)', float: 'left' }}
+        onClick={() => setactiveStep(1)}
+      />
       <form class='formUpload'>
         <div class='input-div'>
-          <input class='input' name='file' type='file' />
+          <input
+            class='input'
+            name='file'
+            type='file'
+            onChange={sendRequestPDFManager}
+          />
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width='1em'
@@ -26,7 +37,10 @@ function MainContainer() {
         <button
           data-text='Awesome'
           class='button'
-          onClick={(e) => e.preventDefault()}
+          type='submit'
+          onClick={(e) => {
+            e.preventDefault();
+          }}
         >
           <span class='actual-text'>&nbsp;Upload Resume!&nbsp;</span>
           <span class='hover-text' aria-hidden='true'>
