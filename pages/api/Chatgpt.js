@@ -21,6 +21,8 @@ handler.post(async (req, res) => {
 
     const response = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
+      max_tokens: 1000,
+
       messages: [
         {
           role: 'system',
