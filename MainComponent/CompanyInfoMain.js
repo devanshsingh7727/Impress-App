@@ -74,7 +74,15 @@ function CompanyInfoMain({
         </div>
         <div class='formButtons'>
           <button
-            class='form-submit-btn'
+            class={
+              CompanyData?.recruiter_name &&
+              CompanyData?.recruiter_email &&
+              CompanyData?.company_name &&
+              CompanyData?.position &&
+              CompanyData?.company_description
+                ? 'form-submit-btnHighlight'
+                : 'form-submit-btn'
+            }
             onClick={(e) => {
               e.preventDefault();
               SubmitCompanydata();
