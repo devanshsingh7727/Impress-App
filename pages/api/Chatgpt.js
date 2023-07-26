@@ -26,7 +26,7 @@ handler.post(async (req, res) => {
       messages: [
         {
           role: 'system',
-          content: `you are the ai assitant which help the user generating the email in profesional tone.`,
+          content: `you are the ai assitant which help the user generating the email of 300 words in profesional tone`,
         },
         {
           role: 'assistant',

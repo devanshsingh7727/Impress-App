@@ -7,6 +7,9 @@ import ResumeUpload from './ResumeUpload';
 import axiosConnection from './axioshelper';
 import LoadingScreen from './LoadingScreen';
 import OutputPage from './OutputPage';
+import Swal from 'sweetalert2';
+import { Configuration, OpenAIApi } from 'openai';
+
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
 });
@@ -90,15 +93,50 @@ function Container() {
         axiosConnection.defaults.maxBodyLength = 100000000;
         let Text =
           data.test?.length >= 2000 ? data.test.slice(0, 2000) : data.test;
-        const MainGpt = await axiosConnection.post('/Chatgpt', {
-          text: Text,
-          CompanyData,
+        let Maindata = JSON.stringify(Text);
+
+        let prompt = `Compose a professional email using the provided resume data to apply for the position at ${CompanyData.company_name}. The company requires candidates with the following skills: ${CompanyData.company_description}. I am interested in the ${CompanyData.position} position, and I noticed that the recruiter handling this role is ${CompanyData.recruiter_name}. Please use the candidate's information enclosed within '''${Maindata}''' to craft the email.
+        also create a json format which have keys-> 1) subject 2)content, output the json only which is parsed by JSON.parse.
+        `;
+        const configuration = new Configuration({
+          apiKey: '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',
         });
-        setGeneratedEmail(JSON.parse(MainGpt.data.data));
+        const openai = new OpenAIApi(configuration);
+        const response = await openai.createChatCompletion({
+          model: 'gpt-3.5-turbo',
+          max_tokens: 1000,
+
+          messages: [
+            {
+              role: 'system',
+              content: `you are the ai assitant which help the user generating the email of 300 words in profesional tone`,
+            },
+            {
+              role: 'assistant',
+              content: `
+              {
+                subject:'',
+                content:''
+              }
+              `,
+            },
+            {
+              role: 'assistant',
+              content: prompt,
+            },
+          ],
+          temperature: 0,
+        });
+
+        setGeneratedEmail(JSON.parse(response.data.choices[0].message.content));
         setactiveStep(4);
       } catch (err) {
         setactiveStep(0);
-
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: err,
+        });
         console.log(err);
       }
     }
