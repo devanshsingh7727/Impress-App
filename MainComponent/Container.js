@@ -88,8 +88,10 @@ function Container() {
 
         axiosConnection.defaults.maxContentLength = 100000000;
         axiosConnection.defaults.maxBodyLength = 100000000;
+        let Text =
+          data.test?.length >= 2000 ? data.test.slice(0, 2000) : data.test;
         const MainGpt = await axiosConnection.post('/Chatgpt', {
-          text: data.test,
+          text: Text,
           CompanyData,
         });
         setGeneratedEmail(JSON.parse(MainGpt.data.data));
