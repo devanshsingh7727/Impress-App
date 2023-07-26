@@ -86,6 +86,8 @@ function Container() {
           },
         });
 
+        axiosConnection.defaults.maxContentLength = 100000000;
+        axiosConnection.defaults.maxBodyLength = 100000000;
         const MainGpt = await axiosConnection.post('/Chatgpt', {
           text: data.test,
           CompanyData,

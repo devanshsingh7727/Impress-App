@@ -16,7 +16,7 @@ handler.post(async (req, res) => {
     let CompanyData = { ...req.body.CompanyData };
 
     let prompt = `Compose a professional email using the provided resume data to apply for the position at ${CompanyData.company_name}. The company requires candidates with the following skills: ${CompanyData.company_description}. I am interested in the ${CompanyData.position} position, and I noticed that the recruiter handling this role is ${CompanyData.recruiter_name}. Please use the candidate's information enclosed within '''${data}''' to craft the email.
-    also create a json format which have keys-> 1) subject 2)content, output the json only which is parsed by JSON.parse
+    also create a json format which have keys-> 1) subject 2)content, output the json only which is parsed by JSON.parse.
     `;
 
     const response = await openai.createChatCompletion({
@@ -25,6 +25,15 @@ handler.post(async (req, res) => {
         {
           role: 'system',
           content: `you are the ai assitant which help the user generating the email in profesional tone.`,
+        },
+        {
+          role: 'assistant',
+          content: `
+          {
+            subject:'',
+            content:''
+          }
+          `,
         },
         {
           role: 'assistant',
