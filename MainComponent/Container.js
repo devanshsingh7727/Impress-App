@@ -99,7 +99,7 @@ function Container() {
         also create a json format which have keys-> 1) subject 2)content, output the json only which is parsed by JSON.parse.
         `;
         const configuration = new Configuration({
-          apiKey: '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',
+          apiKey: process.env.APIKEY,
         });
         const openai = new OpenAIApi(configuration);
         const response = await openai.createChatCompletion({

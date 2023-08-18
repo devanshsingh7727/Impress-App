@@ -2,6 +2,7 @@
   "name": "cold-email",
   "version": "0.1.0",
   "private": true,
+  "author": "Devansh Singh",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
